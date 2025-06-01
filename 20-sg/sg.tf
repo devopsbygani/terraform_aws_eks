@@ -1,46 +1,22 @@
 module "mysql_sg" {
-    # source = "git::https://example.com/vpc.git?ref=main" # to call module from git
-    source = "../../terraform-aws-security-group" # it is local module 
+    source = "git::https://github.com/devopsbygani/terraform-aws-security-group.git?ref=main" # to call module from git
+    #source = "../../terraform-aws-security-group" # it is local module 
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
     sg_name = "mysql"   
 }
 
-module "backend_sg" {
-    source = "../../terraform-aws-security-group"
-    project_name = var.project_name
-    environment = var.environment
-    vpc_id = local.vpc_id
-    sg_name = "backend"   
-}
-
-module "frontend_sg" {
-    source = "../../terraform-aws-security-group"
-    project_name = var.project_name
-    environment = var.environment
-    vpc_id = local.vpc_id
-    sg_name = "frontend"   
-}
-
 module "bastion_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/devopsbygani/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
     sg_name = "bastion"   
 }
 
-module "ansible_sg" {
-    source = "../../terraform-aws-security-group"
-    project_name = var.project_name
-    environment = var.environment
-    vpc_id = local.vpc_id
-    sg_name = "ansible"   
-}
-
 module "app_alb_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/devopsbygani/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
@@ -48,19 +24,11 @@ module "app_alb_sg" {
 }
 
 module "vpn_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/devopsbygani/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
     sg_name = "vpn"   
-}
-
-module "web_alb_sg" {
-    source = "../../terraform-aws-security-group"
-    project_name = var.project_name
-    environment = var.environment
-    vpc_id = local.vpc_id
-    sg_name = "web-alb"   
 }
 
 #  to allow connection between mysql to backend.
