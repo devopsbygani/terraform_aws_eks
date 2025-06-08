@@ -44,7 +44,7 @@ module "eks" {
       min_size      = 2
       max_size      = 10
       desired_size  = 2
-      #capacity_type = "SPOT"
+      capacity_type = "SPOT"
       iam_role_additional_policies = {
         AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
         AmazonElasticFileSystemFullAccess = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"

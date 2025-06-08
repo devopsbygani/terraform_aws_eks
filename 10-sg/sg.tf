@@ -28,7 +28,7 @@ module "eks_control_plane_sg" {
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
-    sg_name = "eks_control_plane"   
+    sg_name = "eks-control-plane"   
 }
 module "node_sg" {
     source = "git::https://github.com/devopsbygani/terraform-aws-security-group.git?ref=main"
@@ -105,16 +105,16 @@ resource "aws_security_group_rule" "eks_control_plane_node" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  source_security_group_id = module.eks_control_plane_sg.id
-  security_group_id = module.node_sg.id  
+  source_security_group_id = module.node_sg.id
+  security_group_id = module.eks_control_plane_sg.id  
 }
 resource "aws_security_group_rule" "node_eks_control_plane" {
   type              = "ingress"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  source_security_group_id = module.node_sg.id
-  security_group_id = module.eks_control_plane_sg.id  
+  source_security_group_id = module.eks_control_plane_sg.id
+  security_group_id = module.node_sg.id  
 }
 
 resource "aws_security_group_rule" "node_vpc" {
@@ -122,7 +122,7 @@ resource "aws_security_group_rule" "node_vpc" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["0.0.0.0/16"]
   security_group_id = module.node_sg.id
 }
 resource "aws_security_group_rule" "bastion_public" {
