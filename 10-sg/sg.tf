@@ -20,7 +20,7 @@ module "ingress_alb_sg" {
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
-    sg_name = "app-alb"   
+    sg_name = "ingress-alb"   
 }
 
 module "eks_control_plane_sg" {
@@ -28,14 +28,14 @@ module "eks_control_plane_sg" {
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
-    sg_name = "app-alb"   
+    sg_name = "eks_control_plane"   
 }
 module "node_sg" {
     source = "git::https://github.com/devopsbygani/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     vpc_id = local.vpc_id
-    sg_name = "app-alb"   
+    sg_name = "node"   
 }
 
 
