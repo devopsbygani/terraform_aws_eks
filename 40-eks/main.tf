@@ -11,7 +11,7 @@ module "eks" {
 
 
   cluster_name    = local.resource_name
-  cluster_version = "1.30"
+  cluster_version = "1.31"
 
   cluster_endpoint_public_access  = true
 
@@ -74,3 +74,19 @@ module "eks" {
 
   tags = var.common_tags
 }
+
+# resource "kubernetes_config_map" "aws_auth" {
+#   metadata {
+#     name      = "aws-auth"
+#     namespace = "kube-system"
+#   }
+
+#   data = {
+#     mapUsers = yamlencode([{
+#       userarn  = "arn:aws:iam::905418383993:user/kubernetes"
+#       username = "admin"
+#       groups   = ["system:masters"]
+#     }])
+#   }
+# }
+
