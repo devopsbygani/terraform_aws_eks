@@ -9,3 +9,4 @@ resource "aws_ssm_parameter" "frontend_arn" {
   type  = "String"
   value = aws_ecr_repository.frontend.arn
 }
+
